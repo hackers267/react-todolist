@@ -1,23 +1,28 @@
-import {Component} from "react";
+import { Component } from "react";
 
 export class Filter extends Component {
+  allState = ["all", "complete", "uncompleted"];
 
-    allState=['all','complete','uncompleted'];
+  constructor(props: Readonly<{}> | {}) {
+    super(props);
+    this.state = {
+      filter: "all",
+    };
+  }
 
-    constructor(props: Readonly<{}> | {}) {
-        super(props);
-        this.state = {
-            filter:'all'
-        }
-    }
+  onClick(str: string) {
+    console.log(str);
+  }
 
-    onClick(){}
-
-    render() {
-        return <ul>
-            {
-                this.allState.map(x=><li key={x}>{x.toUpperCase()}</li>)
-            }
-        </ul>;
-    }
+  render() {
+    return (
+      <ul>
+        {this.allState.map((x) => (
+          <li key={x} onClick={() => this.onClick(x)}>
+            {x.toUpperCase()}
+          </li>
+        ))}
+      </ul>
+    );
+  }
 }
