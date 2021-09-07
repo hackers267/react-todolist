@@ -1,10 +1,13 @@
 import { ChangeEvent, ChangeEventHandler, Component, FormEvent } from "react";
+import { connect } from "react-redux";
+import { ADD_TODO } from "../actionTypes";
+import { add_todo } from "../actions";
 
-export class TodoAdd extends Component<any, any> {
+export class TodoView extends Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      text: "react",
+      text: "",
     };
   }
 
@@ -17,7 +20,11 @@ export class TodoAdd extends Component<any, any> {
 
   submit(event: FormEvent) {
     event.preventDefault();
-    console.log(this.state.text);
+    const { add } = this.props;
+    add(this.state.text);
+    this.setState({
+      text: "",
+    });
   }
 
   render() {
@@ -29,3 +36,15 @@ export class TodoAdd extends Component<any, any> {
     );
   }
 }
+
+function mapState(state: any) {
+  return state;
+}
+
+function mapDispatch(dispatch: any) {
+  return {
+    add: (text: string) => dispatch(add_todo(text)),
+  };
+}
+
+export const TodoAdd = connect(mapState, mapDispatch)(TodoView);
