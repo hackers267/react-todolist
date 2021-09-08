@@ -2,7 +2,6 @@ import TodoItem from "./TodoItem";
 import { TodoAdd } from "./TodoAdd";
 import { connect } from "react-redux";
 import { Component } from "react";
-import { ADD_TODO } from "../actionTypes";
 
 class TodoView extends Component<any, any> {
   render() {
