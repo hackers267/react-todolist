@@ -1,5 +1,4 @@
-import {Filter} from './views/Filter'
+import reducer from "./reducer";
+import { Filter } from "./views/Filter";
 
-export {
-    Filter
-}
+export { Filter, reducer };

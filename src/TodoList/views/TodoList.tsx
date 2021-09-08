@@ -2,6 +2,7 @@ import TodoItem from "./TodoItem";
 import { TodoAdd } from "./TodoAdd";
 import { connect } from "react-redux";
 import { Component } from "react";
+import { filterTypes } from "../../Filter/constant";
 
 class TodoView extends Component<any, any> {
   render() {
@@ -22,9 +23,22 @@ class TodoView extends Component<any, any> {
   }
 }
 
+function selectVisibleList(list: any[], filter: filterTypes) {
+  switch (filter) {
+    case filterTypes.all:
+      return list;
+    case filterTypes.completed:
+      return list.filter((x) => x.done);
+    case filterTypes.uncompleted:
+      return list.filter((x) => !x.done);
+    default:
+      throw new Error("not support filter type");
+  }
+}
+
 function mapState(state: any) {
   return {
-    list: state.todos,
+    list: selectVisibleList(state.todos, state.filter),
   };
 }
 
